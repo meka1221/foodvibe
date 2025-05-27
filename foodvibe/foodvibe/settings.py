@@ -93,9 +93,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'FoodVibe',
-        'USER': 'postgres',
         'PASSWORD': 'asd12345',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': 5432,
     }
 }
