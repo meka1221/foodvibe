@@ -33,25 +33,15 @@ class CategoryFood(models.Model):
 # Модель ингредиента
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)  # Название ингредиента
-    quantity = models.FloatField()  # Количество ингредиента
-    unit = models.CharField(max_length=50)  # Единица измерения (шт., г, мл и т.д.)
-
-    # Состав ингредиента
-    calories_per_unit = models.IntegerField(default=0)  # Калории на единицу
-    protein_per_unit = models.FloatField(default=0)  # Белки на единицу
-    fat_per_unit = models.FloatField(default=0)  # Жиры на единицу
-    carbohydrates_per_unit = models.FloatField(default=0)  # Углеводы на единицу
-    vitamins = models.TextField(null=True, blank=True)  # Витамины в ингредиенте
-    minerals = models.TextField(null=True, blank=True)  # Минералы в ингредиенте
 
     def __str__(self):
-        return f"{self.quantity} {self.unit} {self.name}"
+        return f"{self.name}"
 
 
 # Модель рецепта
 class Recipe(models.Model):
     title = models.CharField(max_length=255, unique=True)  # Название рецепта
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes")  # Автор рецепта
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  # Автор рецепта
     description = models.TextField()  # Краткое описание рецепта
     prep_time = models.IntegerField()  # Время приготовления в минутах
     difficulty = models.CharField(max_length=50,
@@ -60,7 +50,7 @@ class Recipe(models.Model):
     category = models.ForeignKey(CategoryFood, on_delete=models.CASCADE) # Категория рецепта например: "Завтрак","Ужин","Десерт"
     published_at = models.DateTimeField(auto_now_add=True)  # Дата публикации
     servings = models.IntegerField()  # Количество порций
-    ingredients = models.ManyToManyField(Ingredient, related_name='recipes')  # Связь с ингредиентами
+    ingredients = models.TextField()
     steps = models.TextField()  # Шаги приготовления
     is_featured = models.BooleanField(default=False)  # Флаг избранного рецепта
 
@@ -79,8 +69,8 @@ class Recipe(models.Model):
 
 # Модель избранного
 class Favorite(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')  # Связь с пользователем
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='favorites')  # Связь с рецептом
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Связь с пользователем
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)  # Связь с рецептом
     added_at = models.DateTimeField(auto_now_add=True)  # Дата добавления в избранное
 
     class Meta:
@@ -99,7 +89,7 @@ CHOICES_STAR = (
 # Модель комментария
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Связь с пользователем
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')  # Связь с рецептом
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)  # Связь с рецептом
     text = models.TextField()  # Текст комментария
     created_at = models.DateTimeField(auto_now_add=True)  # Дата создания комментария
     rating = models.IntegerField(choices=CHOICES_STAR)
