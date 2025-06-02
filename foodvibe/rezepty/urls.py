@@ -16,8 +16,6 @@ urlpatterns = [
                                  'post': 'create'}), name='favorite_list'),
     path('favorite/<int:pk>/', RecipeDetailViewSet.as_view({'get': 'retrieve',
                                           'put': 'update', 'delete': 'destroy'}), name='recipe_detail'),
-    path('', RecipeViewSet.as_view({'get': 'list',
-                                    'post': 'create'}), name='recipe_list'),
     path('comment/', CommentViewSet.as_view({'get': 'list',
                                  'post': 'create'}), name='comment_list'),
     path('comment/<int:pk>/', CommentViewSet.as_view({'get': 'retrieve',
