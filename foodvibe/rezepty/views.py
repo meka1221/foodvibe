@@ -11,7 +11,6 @@ class CategoryFoodViewSet(viewsets.ModelViewSet):
     serializer_class = CategoryFoodSerializers
     filter_backends = [DjangoFilterBackend]
     search_fields = ['title']
-    permission_classes = [permissions.IsAuthenticated]
 
 
 class TypeViewSet(viewsets.ModelViewSet):
