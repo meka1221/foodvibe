@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.text import slugify
 
 
 # Модель пользователя
@@ -16,7 +15,6 @@ class User(AbstractUser):
 # Категория рецепта (можно несколько к одному рецепту)
 class Type(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -34,7 +32,6 @@ class CategoryFood(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)  # Название ингредиента
     category = models.ForeignKey(CategoryFood, on_delete=models.CASCADE)
-
     def __str__(self):
         return f"{self.name}"
 
@@ -103,7 +100,6 @@ class Comment(models.Model):
 # План питания (например, план на 7 дней для похудения)
 class MealPlan(models.Model):
     title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, blank=True)
     description = models.TextField()
     recipes = models.ManyToManyField(Recipe, related_name='meal_plans')
     duration_days = models.IntegerField(default=30)
