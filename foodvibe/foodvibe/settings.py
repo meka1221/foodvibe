@@ -190,5 +190,3 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # если React через Create React App
     "http://51.20.52.136",
 ]
-
-
