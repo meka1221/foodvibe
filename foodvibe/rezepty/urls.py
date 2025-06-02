@@ -9,7 +9,7 @@ urlpatterns = [
     path('category/', CategoryFoodViewSet.as_view({'get': 'list',
                                     'post': 'create'}), name='category_list'),
     path('type/', TypeViewSet.as_view({'get': 'list',
-                                                   'post': 'create'}), name='type_list'),
+                                    'post': 'create'}), name='type_list'),
     path('mealplan/', MealPlanListCreateViewSet.as_view({'get': 'list',
                                        'post': 'create'}), name='mealplan_list'),
     path('favorite/', FavoriteViewSet.as_view({'get': 'list',
