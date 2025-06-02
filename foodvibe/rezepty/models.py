@@ -31,7 +31,6 @@ class CategoryFood(models.Model):
 # Модель ингредиента
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)  # Название ингредиента
-    category = models.ForeignKey(CategoryFood, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.name}"
 
