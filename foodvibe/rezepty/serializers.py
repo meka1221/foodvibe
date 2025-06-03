@@ -38,7 +38,6 @@ class LoginSerializer(serializers.Serializer):
         }
 
 
-
 class TypeSerializers(serializers.ModelSerializer):
     class Meta:
         model = Type
