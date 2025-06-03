@@ -1,8 +1,16 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register(r'users', UserViewSet, basename='users')
 
 urlpatterns = [
-    path('', RecipeViewSet.as_view({'get': 'list',
+    path('', include(router.urls)),
+    path('register/', RegisterView.as_view(), name='register_list'),
+    path('login/', LoginView.as_view(), name='login_list'),
+    path('logout/', LogoutView.as_view(), name='logout_list'),
+    path('recipe/', RecipeViewSet.as_view({'get': 'list',
                                  'post': 'create'}), name='recipe_list'),
     path('<int:pk>/', RecipeDetailViewSet.as_view({'get': 'retrieve',
                                           'put': 'update', 'delete': 'destroy'}), name='recipe_detail'),
