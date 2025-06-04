@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': 'postgres',  # ← исправлено
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'HOST': '51.20.52.136',
         'PORT': '5432',
     }
 }
